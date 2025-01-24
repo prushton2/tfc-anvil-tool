@@ -1,3 +1,5 @@
+import json
+
 buttons = {
     "HIT_LIGHT"  : -3,
     "HIT_MEDIUM" : -6,
@@ -8,6 +10,17 @@ buttons = {
     "BEND"       :  7,
     "UPSET"      : 13,
     "SHRINK"     : 16
+}
+
+abbreviations = {
+    "L": "HIT_LIGHT",
+    "M": "HIT_MEDIUM",
+    "H": "HIT_HARD",
+    "D": "DRAW",
+    "P": "PUNCH",
+    "B": "BEND",
+    "U": "UPSET",
+    "S": "SHRINK"
 }
 
 # Really dont know how to do these kind of algs, so im kinda brute forcing here
@@ -81,12 +94,10 @@ def prettify_moves(moves):
     
     return output
 
-def main():
-    target = 70
-    final_moves = ["DRAW", "DRAW", "BEND"]
-
+def full_calculate(target, final_moves):
     new_target = target
     for i in final_moves:
+        i = i.upper()
         if(i == "HIT"):
             new_target -= buttons["HIT_LIGHT"]
         else:
@@ -95,8 +106,36 @@ def main():
 
     moves = calculate(new_target)
 
-    print(prettify_moves(moves))
+    return prettify_moves(moves)
+
+def sum_abbreviated_moves(abbr):
+    sum = 0
+    for i in abbr:
+        i = i.upper()
+        sum += buttons[abbreviations[i]]
+    return sum
 
 
+def main():
+    while(1):
+        command = input(">").split(" ")
+        
+        if(command[0] == "solve"):
+            
+            if(command[1] == "item"):
+                pass
+            else:
+                target = int(command[1])
+                final_moves = command[2:]
+                print(full_calculate(target, final_moves))
+
+        elif(command[0] == "calc"):
+            print(sum_abbreviated_moves(command[1]))
+
+
+    full_calculate(70, ["BEND", "DRAW", "DRAW"])
+    
+
+z
 if(__name__ == "__main__"):
     main()
