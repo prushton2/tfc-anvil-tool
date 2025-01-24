@@ -123,7 +123,9 @@ def main():
         if(command[0] == "solve"):
             
             if(command[1] == "item"):
-                pass
+                with open("tool_dict.json", "r") as f:
+                    j = json.loads(f.read())
+                    print(full_calculate(j[command[2]]["work"], j[command[2]]["last_hits"]))
             else:
                 target = int(command[1])
                 final_moves = command[2:]
@@ -132,10 +134,22 @@ def main():
         elif(command[0] == "calc"):
             print(sum_abbreviated_moves(command[1]))
 
+        elif(command[0] == "save"):
+            j = {}
+            with open("tool_dict.json", "r") as f:
+                j  = json.loads(f.read())
+
+            j[command[1]] = {
+                "work": int(command[2]),
+                "last_hits": command[3:]
+            }
+
+            with open("tool_dict.json", "w") as f:
+                f.write(json.dumps(j))
+
 
     full_calculate(70, ["BEND", "DRAW", "DRAW"])
     
 
-z
 if(__name__ == "__main__"):
     main()
