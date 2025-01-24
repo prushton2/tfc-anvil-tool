@@ -30,5 +30,5 @@ To obtain it:
         * Example: `calc ssshhl` returns `27`, as its the sum of 3 shrinks, 2 heavy hits, and 1 light hit
     * save \<string name\> \<int work\> \<string last_hit...\>
         * Saves an items info to the dict for later use.
-            * Note that the work for an item varies between worlds, and item names cannot contain spaces
-        * Example: `save steel_rod 70 bend draw draw`
+            * Note that the work for an item varies between worlds, and names cannot contain spaces
+        * Example: `save steel_rod 70 bend draw light_hit`
