@@ -30,11 +30,11 @@ hit_shortcuts = [
     ["HIT_MEDIUM", "BEND"], #1
     ["PUNCH"], #2
 
-    ["PUNCH"], #3
+    ["PUNCH", "HIT_MEDIUM", "BEND"], #3
     ["BEND", "HIT_LIGHT"], #4
     
-    ["PUNCH"], #5
-    ["PUNCH"], #6
+    ["PUNCH", "PUNCH", "HIT_MEDIUM", "BEND"], #5
+    ["PUNCH", "PUNCH", "PUNCH"], #6
     
     ["BEND"], #7
     ["BEND", "BEND", "HIT_MEDIUM"], #8
@@ -43,7 +43,7 @@ hit_shortcuts = [
     ["UPSET", "HIT_LIGHT"], #10
 
     ["UPSET", "HIT_HARD", "BEND"], #11
-    ["DRAW", "SHRINK", "UPSET"], #12
+    ["UPSET", "HIT_LIGHT", "PUNCH"], #12
 
     ["UPSET"], #13
     ["BEND", "BEND"], #14
@@ -52,6 +52,15 @@ hit_shortcuts = [
     ["SHRINK"], #16
 
 ]
+
+def verify_shortcuts():
+    for index, i in enumerate(hit_shortcuts):
+        sum = 0
+        for j in i:
+            sum += buttons[j]
+        if(sum != index):
+            print("FAILED", index, i, "(got "+str(sum)+")")
+
 
 def calculate(target):
     accumulator = 0
@@ -117,6 +126,7 @@ def sum_abbreviated_moves(abbr):
 
 
 def main():
+    verify_shortcuts()
     while(1):
         command = input(">").split(" ")
         
