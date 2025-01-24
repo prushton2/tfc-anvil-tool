@@ -31,7 +31,7 @@ hit_shortcuts = [
     ["PUNCH"], #2
 
     ["PUNCH"], #3
-    ["PUNCH"], #4
+    ["BEND", "HIT_LIGHT"], #4
     
     ["PUNCH"], #5
     ["PUNCH"], #6
@@ -60,7 +60,7 @@ def calculate(target):
     while (accumulator != target):
 
         delta = target - accumulator
-                
+
         if (delta > 16):
             accumulator += 16
             moves.append("SHRINK")
